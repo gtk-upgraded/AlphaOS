@@ -1,0 +1,116 @@
+@mixin scrollbar() {
+  scrollbar {
+    border: none;
+    background-color: transparent;
+
+    trough {
+      border: none;
+      background-color: $base_color;
+      border-radius: $scrollbar_radius;
+    }
+
+    &.overlay-indicator {
+      &:not(.dragging):not(.hovering) {
+        border: none;
+        opacity: 1;
+        margin: 0;
+        background-color: transparent;
+      }
+      
+      &.dragging, &.hovering {
+        opacity: 1;
+      }
+    }
+
+    &.horizontal {
+      border-top: none;
+      
+      slider {
+        min-height: 14px;
+        min-width: 45px;
+        border-width: 2px;
+        border-color: transparent;
+        border-radius: $scrollbar_radius;
+        background-color: $base_color;
+        background-image: linear-gradient(to bottom, $base_color 45%, gtkshade($base_color, 0.85) 45%, $base_color);
+        
+        &:backdrop {}
+      }
+      
+      trough {
+        margin-right: -5px;
+        margin-left: -5px;
+        background-image: linear-gradient(to bottom, gtkshade($base_color, 0.85), $base_color 70%);
+      }
+
+      button {
+        border: none;
+        padding: 0;
+        border-radius: 0;
+        color: transparent;
+        box-shadow: none;
+        min-width: 20px;
+        min-height: 14px;
+        
+        &:backdrop { color: transparent; }
+        
+        &.down {
+          background-image: url('assets/stepper-right.png');
+        }
+
+        &.up {
+          background-image: url('assets/stepper-left.png');
+        }
+      }
+    }
+
+    &.vertical {
+      border-left: none;
+      
+      slider {
+        min-height: 45px;
+        min-width: 14px;
+        padding: 0;
+        border-width: 1px;
+        border-style: solid;
+        border-color: gtkshade($borders, 0.8);
+        border-radius: $scrollbar_radius;
+        background-color: $base_color;
+        background-image: linear-gradient(to right, $base_color 45%, gtkshade($base_color, 0.85) 45%, $base_color);
+        
+        &:backdrop {}
+      }
+      
+      trough {
+        margin-bottom: -5px;
+        margin-top: -5px;
+        background-image: linear-gradient(to right, gtkshade($base_color, 0.85), $base_color 70%);
+      }
+
+      button {
+        border: none;
+        padding: 0;
+        border-radius: 0;
+        color: transparent;
+        box-shadow: none;
+        min-width: 14px;
+        min-height: 20px;
+        
+        &:backdrop { color: transparent; }
+          
+        &.down {
+          background-image: url('assets/stepper-down.png');
+        }
+
+        &.up {
+          background-image: url('assets/stepper-up.png');
+        }
+      }
+    }
+
+    treeview ~ &.vertical {
+      border-top: 1px solid $borders;
+      margin-top: -1px;
+    }
+  }
+}
